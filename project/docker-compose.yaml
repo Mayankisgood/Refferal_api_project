@@ -1,0 +1,18 @@
+version: '3'
+services:
+   web:
+     build: .
+     command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+     volumes:
+       - .:/app
+     ports:
+       - "8000:8000"
+     environment:
+       DATABASE_URL: postgres://postgres:1234@localhost:5432/Refrerral_system
+ 
+   db:
+     image: postgres
+     environment:
+       POSTGRES_DB: Refrerral_system
+       POSTGRES_USER: postgres
+       POSTGRES_PASSWORD: 1234
